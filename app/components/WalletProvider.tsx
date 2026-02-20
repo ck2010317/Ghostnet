@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, ReactNode } from "react";
+import { useMemo, ReactNode, useEffect } from "react";
 import {
   ConnectionProvider,
   WalletProvider,
@@ -18,6 +18,27 @@ export default function WalletContextProvider({ children }: { children: ReactNod
     () => [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
     []
   );
+
+  // Suppress wallet adapter initialization errors
+  useEffect(() => {
+    const originalError = console.error;
+    console.error = (...args: any[]) => {
+      const message = args[0]?.toString?.() || "";
+      // Suppress known non-blocking wallet errors
+      if (
+        message.includes("Cannot redefine property: ethereum") ||
+        message.includes("writeBigUInt64LE") ||
+        message.includes("StreamMiddleware") ||
+        message.includes("Phantom was registered")
+      ) {
+        return;
+      }
+      originalError(...args);
+    };
+    return () => {
+      console.error = originalError;
+    };
+  }, []);
 
   return (
     <ConnectionProvider endpoint={endpoint}>

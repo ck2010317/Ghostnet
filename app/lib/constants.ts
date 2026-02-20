@@ -20,5 +20,5 @@ export const PLAYER_COLORS = ["#3B82F6", "#EF4444", "#10B981", "#F59E0B"];
 export const PLAYER_LABELS = ["Blue", "Red", "Green", "Yellow"];
 export const PLAYER_EMOJIS = ["🔵", "🔴", "🟢", "🟡"];
 
-export const GAME_SEED = Buffer.from("game");
-export const PLAYER_SEED = Buffer.from("player");
+export const GAME_SEED = new TextEncoder().encode("game");
+export const PLAYER_SEED = new TextEncoder().encode("player");

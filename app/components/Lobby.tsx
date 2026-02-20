@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface LobbyProps {
   onCreateGame: (gameId: number, stake: number) => Promise<void>;
@@ -17,7 +17,12 @@ export default function Lobby({
   isConnected,
   loading,
 }: LobbyProps) {
-  const [gameId, setGameId] = useState(Math.floor(Math.random() * 100000));
+  const [gameId, setGameId] = useState(1);
+
+  // Generate random game ID only on client to avoid hydration mismatch
+  useEffect(() => {
+    setGameId(Math.floor(Math.random() * 100000));
+  }, []);
   const [joinGameId, setJoinGameId] = useState("");
   const [stake, setStake] = useState(0);
   const [tab, setTab] = useState<"create" | "join">("create");

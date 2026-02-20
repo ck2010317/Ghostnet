@@ -1,20 +1,24 @@
 import { PublicKey } from "@solana/web3.js";
+import { BN } from "@coral-xyz/anchor";
 import { PROGRAM_ID, GAME_SEED, PLAYER_SEED } from "./constants";
 
+/** Encode a number as 8-byte little-endian Uint8Array (browser-safe, no BigInt Buffer methods) */
+function encodeU64LE(value: number): Uint8Array {
+  const bn = new BN(value);
+  const arr = bn.toArray("le", 8); // little-endian, padded to 8 bytes
+  return new Uint8Array(arr);
+}
+
 export function getGamePDA(gameId: number): [PublicKey, number] {
-  const buf = Buffer.alloc(8);
-  buf.writeBigUInt64LE(BigInt(gameId));
   return PublicKey.findProgramAddressSync(
-    [GAME_SEED, buf],
+    [GAME_SEED, encodeU64LE(gameId)],
     PROGRAM_ID
   );
 }
 
 export function getPlayerPDA(gameId: number, player: PublicKey): [PublicKey, number] {
-  const buf = Buffer.alloc(8);
-  buf.writeBigUInt64LE(BigInt(gameId));
   return PublicKey.findProgramAddressSync(
-    [PLAYER_SEED, buf, player.toBuffer()],
+    [PLAYER_SEED, encodeU64LE(gameId), player.toBuffer()],
     PROGRAM_ID
   );
 }
