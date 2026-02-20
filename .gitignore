@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+.yarn
+.pnp
+package-lock.json
+yarn.lock
+
+# Solana/Anchor
+target/
+.anchor/
+*.so
+*.dylib
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build
+dist/
+build/
+.next/
+out/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
