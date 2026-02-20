@@ -2,8 +2,6 @@
   "buildCommand": "next build",
   "devCommand": "next dev",
   "installCommand": "npm install",
-  "env": [],
-  "public": true,
   "headers": [
     {
       "source": "/(.*)",
