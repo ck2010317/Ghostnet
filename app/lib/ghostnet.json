@@ -1,0 +1,984 @@
+{
+  "address": "9LuS7xu5DLUac1sbFsF2uBYAdnfJrrs1C2JHgdYfjmtQ",
+  "metadata": {
+    "name": "ghostnet",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "build_defense",
+      "docs": [
+        "Build defense on your tile"
+      ],
+      "discriminator": [
+        187,
+        0,
+        140,
+        48,
+        98,
+        96,
+        110,
+        21
+      ],
+      "accounts": [
+        {
+          "name": "game",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "game_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "game_id"
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "_game_id",
+          "type": "u64"
+        },
+        {
+          "name": "x",
+          "type": "u8"
+        },
+        {
+          "name": "y",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "collect_resources",
+      "docs": [
+        "Collect resources from owned tiles"
+      ],
+      "discriminator": [
+        80,
+        180,
+        84,
+        6,
+        25,
+        165,
+        77,
+        252
+      ],
+      "accounts": [
+        {
+          "name": "game",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "game_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "game_id"
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "_game_id",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "create_game",
+      "docs": [
+        "Create a new game lobby"
+      ],
+      "discriminator": [
+        124,
+        69,
+        75,
+        66,
+        184,
+        220,
+        72,
+        206
+      ],
+      "accounts": [
+        {
+          "name": "game",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "game_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "game_id",
+          "type": "u64"
+        },
+        {
+          "name": "stake_amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "delegate_game",
+      "docs": [
+        "Delegate game to MagicBlock ER for real-time execution"
+      ],
+      "discriminator": [
+        116,
+        183,
+        70,
+        107,
+        112,
+        223,
+        122,
+        210
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "game",
+          "writable": true
+        },
+        {
+          "name": "delegation_program",
+          "address": "DELeGGvXpWV2fqJUhqcF5ZSYMS4JTLjteaAMARRSaeSh"
+        },
+        {
+          "name": "buffer",
+          "writable": true
+        },
+        {
+          "name": "delegation_record",
+          "writable": true
+        },
+        {
+          "name": "delegation_metadata",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "owner_program",
+          "address": "9LuS7xu5DLUac1sbFsF2uBYAdnfJrrs1C2JHgdYfjmtQ"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "end_game",
+      "docs": [
+        "End game - declare winner"
+      ],
+      "discriminator": [
+        224,
+        135,
+        245,
+        99,
+        67,
+        175,
+        121,
+        252
+      ],
+      "accounts": [
+        {
+          "name": "game",
+          "writable": true
+        },
+        {
+          "name": "authority",
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "join_game",
+      "docs": [
+        "Join an existing game"
+      ],
+      "discriminator": [
+        107,
+        112,
+        18,
+        38,
+        56,
+        173,
+        60,
+        128
+      ],
+      "accounts": [
+        {
+          "name": "game",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "game_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "game_id"
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "game_id",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "move_units",
+      "docs": [
+        "Move units from one tile to adjacent tile"
+      ],
+      "discriminator": [
+        73,
+        208,
+        25,
+        242,
+        174,
+        26,
+        226,
+        155
+      ],
+      "accounts": [
+        {
+          "name": "game",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "game_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "game_id"
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "_game_id",
+          "type": "u64"
+        },
+        {
+          "name": "from_x",
+          "type": "u8"
+        },
+        {
+          "name": "from_y",
+          "type": "u8"
+        },
+        {
+          "name": "to_x",
+          "type": "u8"
+        },
+        {
+          "name": "to_y",
+          "type": "u8"
+        },
+        {
+          "name": "unit_count",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "set_strategy",
+      "docs": [
+        "Set strategy mode for agent"
+      ],
+      "discriminator": [
+        251,
+        41,
+        210,
+        173,
+        140,
+        96,
+        78,
+        235
+      ],
+      "accounts": [
+        {
+          "name": "player_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "game_id"
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "_game_id",
+          "type": "u64"
+        },
+        {
+          "name": "mode",
+          "type": {
+            "defined": {
+              "name": "StrategyMode"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "start_game",
+      "docs": [
+        "Start the game (creator only, needs 2+ players)"
+      ],
+      "discriminator": [
+        249,
+        47,
+        252,
+        172,
+        184,
+        162,
+        245,
+        14
+      ],
+      "accounts": [
+        {
+          "name": "game",
+          "writable": true
+        },
+        {
+          "name": "creator",
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "train_units",
+      "docs": [
+        "Train new units (costs gold)"
+      ],
+      "discriminator": [
+        20,
+        20,
+        63,
+        19,
+        206,
+        135,
+        86,
+        253
+      ],
+      "accounts": [
+        {
+          "name": "game",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "game_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "game_id"
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "_game_id",
+          "type": "u64"
+        },
+        {
+          "name": "x",
+          "type": "u8"
+        },
+        {
+          "name": "y",
+          "type": "u8"
+        },
+        {
+          "name": "count",
+          "type": "u8"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Game",
+      "discriminator": [
+        27,
+        90,
+        166,
+        125,
+        74,
+        100,
+        121,
+        18
+      ]
+    },
+    {
+      "name": "PlayerState",
+      "discriminator": [
+        56,
+        3,
+        60,
+        86,
+        174,
+        16,
+        244,
+        195
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "GameNotInLobby",
+      "msg": "Game is not in lobby state"
+    },
+    {
+      "code": 6001,
+      "name": "GameFull",
+      "msg": "Game is full"
+    },
+    {
+      "code": 6002,
+      "name": "GameNotActive",
+      "msg": "Game is not active"
+    },
+    {
+      "code": 6003,
+      "name": "NotEnoughPlayers",
+      "msg": "Not enough players to start"
+    },
+    {
+      "code": 6004,
+      "name": "NotCreator",
+      "msg": "Only the creator can start the game"
+    },
+    {
+      "code": 6005,
+      "name": "OutOfBounds",
+      "msg": "Coordinates out of bounds"
+    },
+    {
+      "code": 6006,
+      "name": "NotAdjacent",
+      "msg": "Tiles must be adjacent"
+    },
+    {
+      "code": 6007,
+      "name": "NotYourTile",
+      "msg": "This is not your tile"
+    },
+    {
+      "code": 6008,
+      "name": "NotEnoughUnits",
+      "msg": "Not enough units"
+    },
+    {
+      "code": 6009,
+      "name": "NotEnoughResources",
+      "msg": "Not enough resources"
+    },
+    {
+      "code": 6010,
+      "name": "AlreadyHasDefense",
+      "msg": "This tile already has a defense"
+    },
+    {
+      "code": 6011,
+      "name": "MaxUnitsReached",
+      "msg": "Maximum units reached"
+    },
+    {
+      "code": 6012,
+      "name": "PlayerEliminated",
+      "msg": "Player has been eliminated"
+    }
+  ],
+  "types": [
+    {
+      "name": "Game",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "game_id",
+            "type": "u64"
+          },
+          {
+            "name": "creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "stake_amount",
+            "type": "u64"
+          },
+          {
+            "name": "player_count",
+            "type": "u8"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "GameStatus"
+              }
+            }
+          },
+          {
+            "name": "turn",
+            "type": "u64"
+          },
+          {
+            "name": "winner",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "grid",
+            "type": {
+              "array": [
+                {
+                  "array": [
+                    {
+                      "defined": {
+                        "name": "TileState"
+                      }
+                    },
+                    8
+                  ]
+                },
+                8
+              ]
+            }
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "started_at",
+            "type": "i64"
+          },
+          {
+            "name": "finished_at",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GameStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Lobby"
+          },
+          {
+            "name": "Active"
+          },
+          {
+            "name": "Finished"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PlayerState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "game_id",
+            "type": "u64"
+          },
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "player_index",
+            "type": "u8"
+          },
+          {
+            "name": "gold",
+            "type": "u64"
+          },
+          {
+            "name": "wood",
+            "type": "u64"
+          },
+          {
+            "name": "units",
+            "type": "u8"
+          },
+          {
+            "name": "score",
+            "type": "u64"
+          },
+          {
+            "name": "is_alive",
+            "type": "bool"
+          },
+          {
+            "name": "strategy_mode",
+            "type": {
+              "defined": {
+                "name": "StrategyMode"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ResourceType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Gold"
+          },
+          {
+            "name": "Wood"
+          }
+        ]
+      }
+    },
+    {
+      "name": "StrategyMode",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Aggressive"
+          },
+          {
+            "name": "Defensive"
+          },
+          {
+            "name": "Balanced"
+          },
+          {
+            "name": "Economic"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TileState",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Empty"
+          },
+          {
+            "name": "Owned",
+            "fields": [
+              {
+                "name": "player",
+                "type": "u8"
+              },
+              {
+                "name": "units",
+                "type": "u8"
+              },
+              {
+                "name": "has_defense",
+                "type": "bool"
+              },
+              {
+                "name": "has_mine",
+                "type": "bool"
+              }
+            ]
+          },
+          {
+            "name": "Resource",
+            "fields": [
+              {
+                "name": "resource_type",
+                "type": {
+                  "defined": {
+                    "name": "ResourceType"
+                  }
+                }
+              },
+              {
+                "name": "amount",
+                "type": "u64"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
