@@ -1,0 +1,22 @@
+[toolchain]
+package_manager = "yarn"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+ghostnet = "9LuS7xu5DLUac1sbFsF2uBYAdnfJrrs1C2JHgdYfjmtQ"
+
+[programs.devnet]
+ghostnet = "9LuS7xu5DLUac1sbFsF2uBYAdnfJrrs1C2JHgdYfjmtQ"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "https://devnet.helius-rpc.com/?api-key=f3417b56-61ad-4ba8-b0f9-3695ea859a58"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 \"tests/**/*.ts\""
